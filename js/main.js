@@ -86,8 +86,9 @@ function displayDiff(baseText, newText, opts) {
     "contextSizeInputId": "#contextSize"
   };
   var mergedOpts = $.extend({}, defaults, opts);
+  var diffOutputDiv = opts["diffOutputDiv"] || "#diffoutput"
   var diff = diffUsingJS(mergedOpts);
-  displayDiffInDiv(diff, "#diffoutput");
+  displayDiffInDiv(diff, diffOutputDiv);
 };
 
 function displayDiffById(baseId, newId, opts) {

@@ -1,5 +1,11 @@
 $(document).foundation();
 
+var colorLineNumbers = function () {
+  $("#diffoutput td").each(function(){
+    $(this).siblings().addClass($(this).attr("class"));
+  });
+};
+
 var onDragEnter = function(event) {
     event.preventDefault();
     $(this).addClass("dragover");
@@ -22,17 +28,18 @@ onDrop = function(event) {
     event.preventDefault();
     $(this).removeClass("dragover");
     var file = event.originalEvent.dataTransfer.files[0];
-    console.log(file);
     var reader = new FileReader();
     reader.onload = function(e) {
       var result = reader.result;
 
       droppable.data('content', reader.result);
-      if ($("#drop-base").data('content') && $("#drop-changed").data('content'))
+      if ($("#drop-base").data('content') && $("#drop-changed").data('content')) {
+        $('#diff-header').show();
         displayDiff($("#drop-base").data('content'),
                     $("#drop-changed").data('content'),
                     {"viewType": 1}); // 0 - side by side, 1 - inline
-      console.log(result.length);
+        colorLineNumbers();
+      }
     }
     reader.readAsText(file);
     $(this).find('.filename').text(file.name);

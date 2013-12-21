@@ -39,11 +39,11 @@ onDrop = function(event) {
                     {"viewType": 1}); // 0 - side by side, 1 - inline
         colorLineNumbers();
         $('#diff-results').show();
+        window.location.hash = "diff";
       }
     }
     reader.readAsText(file);
     $(this).find('.filename').text(file.name);
-
 },
 
 diffUsingJS = function(opts) {
@@ -59,7 +59,6 @@ diffUsingJS = function(opts) {
     newtxt = difflib.stringAsLines(newText),
     sm = new difflib.SequenceMatcher(base, newtxt),
     opcodes = sm.get_opcodes();
-
 
   return diffview.buildView({
     baseTextLines: base,
@@ -82,7 +81,7 @@ displayDiff = function(baseText, newText, opts) {
     "newText": newText,
   };
   var mergedOpts = $.extend({}, defaults, opts);
-  var diffOutputDiv = opts["diffOutputDiv"] || "#diffoutput"
+  var diffOutputDiv = opts["diffOutputDiv"] || "#diffoutput";
   var diff = diffUsingJS(mergedOpts);
   displayDiffInDiv(diff, diffOutputDiv);
 },
@@ -90,7 +89,7 @@ displayDiff = function(baseText, newText, opts) {
 displayDiffById = function(baseId, newId, opts) {
   var baseText = $(baseId).val();
   var newText = $(newId).val();
-  displayDiff(baseText, newText, opts)
+  displayDiff(baseText, newText, opts);
 };
 
 $(document).ready(function () {

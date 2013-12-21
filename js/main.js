@@ -34,7 +34,6 @@ onDrop = function(event) {
 
       droppable.data('content', reader.result);
       if ($("#drop-base").data('content') && $("#drop-changed").data('content')) {
-        $('#diff-header').show();
         displayDiff($("#drop-base").data('content'),
                     $("#drop-changed").data('content'),
                     {"viewType": 1}); // 0 - side by side, 1 - inline
@@ -51,7 +50,6 @@ function diffUsingJS(opts) {
   var viewType         = opts["viewType"] || 0,
     baseText           = opts["baseText"],
     newText            = opts["newText"],
-    contextSizeInputId = opts["contextSizeInputId"],
     outputDiv          = opts["outputDiv"],
     baseTextName       = opts["baseTextName"] || "Base Text",
     newTextName        = opts["newTextName"] || "New Text";
@@ -59,10 +57,8 @@ function diffUsingJS(opts) {
   var base = difflib.stringAsLines(baseText),
     newtxt = difflib.stringAsLines(newText),
     sm = new difflib.SequenceMatcher(base, newtxt),
-    opcodes = sm.get_opcodes(),
-    contextSize = $(contextSizeInputId).val();
+    opcodes = sm.get_opcodes();
 
-  contextSize = contextSize || null;
 
   return diffview.buildView({
     baseTextLines: base,
@@ -70,7 +66,7 @@ function diffUsingJS(opts) {
     opcodes: opcodes,
     baseTextName: baseTextName,
     newTextName: newTextName,
-    contextSize: contextSize,
+    contextSize: 15,
     viewType: viewType
   });
 };
@@ -83,7 +79,6 @@ function displayDiff(baseText, newText, opts) {
   var defaults = {
     "baseText": baseText,
     "newText": newText,
-    "contextSizeInputId": "#contextSize"
   };
   var mergedOpts = $.extend({}, defaults, opts);
   var diffOutputDiv = opts["diffOutputDiv"] || "#diffoutput"

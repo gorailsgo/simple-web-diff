@@ -39,7 +39,7 @@ onDrop = function(event) {
                     {"viewType": 1}); // 0 - side by side, 1 - inline
         colorLineNumbers();
         $('#diff-results').show();
-        window.location.hash = "diff";
+        window.location.hash = "diff-results";
       }
     }
     reader.readAsText(file);

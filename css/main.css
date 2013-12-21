@@ -32,13 +32,13 @@ h1.main {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: color 0.3s, -webkit-box-shadow 0.45s,border-color 0.45s ease-in-out;
-  -moz-transition: color 0.3s, -moz-box-shadow 0.45s,border-color 0.45s ease-in-out;
-  transition: color 0.3s, box-shadow 0.45s,border-color 0.45s ease-in-out;
+  -webkit-transition: background-color 0.2s, color 0.2s, -webkit-box-shadow 0.45s,border-color 0.45s ease-in-out;
+  -moz-transition: background-color 0.2s, color 0.2s, -moz-box-shadow 0.45s,border-color 0.45s ease-in-out;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.45s,border-color 0.45s ease-in-out;
 }
 
 .droparea.dragover {
-  color: rgba(0,0,255,0.5);
-  border-color: rgba(0, 0, 255, 0.5);
+  background-color: #008cba;
+  color: white;
 }
 

@@ -5,8 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <title>jsdifflib demo</title>
   <link rel="stylesheet" type="text/css" href="javascript/diffview.css"/>
-  <script type="text/javascript" src="javascript/diffview.js"></script>
-  <script type="text/javascript" src="javascript/difflib.js"></script>
+  <script type="text/javascript" src="js/vendor/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="js/vendor/underscore-min.js"></script>
+  <script type="text/javascript" src="js/vendor/diffview.js"></script>
+  <script type="text/javascript" src="js/vendor/difflib.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 <style type="text/css">
 body {
   font-size: 12px;
@@ -46,33 +49,6 @@ label:hover {
 }
 </style>
 
-<script type="text/javascript">
-
-function diffUsingJS(viewType) {
-  "use strict";
-  var byId = function (id) { return document.getElementById(id); },
-    base = difflib.stringAsLines(byId("baseText").value),
-    newtxt = difflib.stringAsLines(byId("newText").value),
-    sm = new difflib.SequenceMatcher(base, newtxt),
-    opcodes = sm.get_opcodes(),
-    diffoutputdiv = byId("diffoutput"),
-    contextSize = byId("contextSize").value;
-
-  diffoutputdiv.innerHTML = "";
-  contextSize = contextSize || null;
-
-  diffoutputdiv.appendChild(diffview.buildView({
-    baseTextLines: base,
-    newTextLines: newtxt,
-    opcodes: opcodes,
-    baseTextName: "Base Text",
-    newTextName: "New Text",
-    contextSize: contextSize,
-    viewType: viewType
-  }));
-}
-
-</script>
 </head>
 <body>
   <h1 class="top"><a href="http://github.com/cemerick/jsdifflib">jsdifflib</a> demo</h1>

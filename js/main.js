@@ -41,10 +41,12 @@ $(document).ready(function () {
     displayDiffInDiv(diff, "#diffoutput");
   };
 
+  var lazyDisplayDiff = _.debounce(displayDiff, 500);
+
   function displayDiffById(baseId, newId) {
     var baseText = $(baseId).val();
     var newText = $(newId).val();
-    displayDiff(baseText, newText)
+    lazyDisplayDiff(baseText, newText)
   }
 
   $("#baseText, #newText").bind("input propertychange", function() {

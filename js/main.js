@@ -1,25 +1,23 @@
 $(document).ready(function () {
   function diffUsingJS(opts={}) {
     "use strict";
-    var viewType = opts["viewType"] || 0,
-      baseId = opts["baseId"],
-      newId = opts["newId"],
+    var viewType         = opts["viewType"] || 0,
+      baseText           = opts["baseText"],
+      newText            = opts["newText"],
       contextSizeInputId = opts["contextSizeInputId"],
-      outputDiv = opts["outputDiv"],
-      baseTextName = opts["baseTextName"] || "Base Text";
-      newTextName = opts["newTextName"] || "New Text";
+      outputDiv          = opts["outputDiv"],
+      baseTextName       = opts["baseTextName"] || "Base Text",
+      newTextName        = opts["newTextName"] || "New Text";
 
-    var base = difflib.stringAsLines($(baseId).val()),
-      newtxt = difflib.stringAsLines($(newId).val()),
+    var base = difflib.stringAsLines(baseText),
+      newtxt = difflib.stringAsLines(newText),
       sm = new difflib.SequenceMatcher(base, newtxt),
       opcodes = sm.get_opcodes(),
-      diffoutputdiv = $(outputDiv)[0],
       contextSize = $(contextSizeInputId).val();
 
-    diffoutputdiv.innerHTML = "";
     contextSize = contextSize || null;
 
-    diffoutputdiv.appendChild(diffview.buildView({
+    return diffview.buildView({
       baseTextLines: base,
       newTextLines: newtxt,
       opcodes: opcodes,
@@ -27,17 +25,30 @@ $(document).ready(function () {
       newTextName: newTextName,
       contextSize: contextSize,
       viewType: viewType
-    }));
-  };
-
-  function displayDiff() {
-    diffUsingJS({"baseId": "#baseText",
-                 "newId": "#newText",
-                 "contextSizeInputId": "#contextSize"
-                 "outputDiv": "#diffoutput"
     });
   };
 
-  $("#baseText, #newText").bind("input propertychange", displayDiff);
-  displayDiff();
+  function displayDiffInDiv(diff, outputDivId) {
+    $(outputDivId).html(diff);
+  }
+
+  function displayDiff(baseText, newText) {
+    var diff = diffUsingJS({
+      "baseText": baseText,
+      "newText": newText,
+      "contextSizeInputId": "#contextSize"
+    });
+    displayDiffInDiv(diff, "#diffoutput");
+  };
+
+  function displayDiffById(baseId, newId) {
+    var baseText = $(baseId).val();
+    var newText = $(newId).val();
+    displayDiff(baseText, newText)
+  }
+
+  $("#baseText, #newText").bind("input propertychange", function() {
+    displayDiffById("#baseText", "#newText");
+  });
+  displayDiffById("#baseText", "#newText");
 });

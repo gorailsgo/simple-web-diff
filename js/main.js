@@ -29,7 +29,9 @@ onDrop = function(event) {
 
       droppable.data('content', reader.result);
       if ($("#drop-base").data('content') && $("#drop-changed").data('content'))
-        displayDiff($("#drop-base").data('content'), $("#drop-changed").data('content'))
+        displayDiff($("#drop-base").data('content'),
+                    $("#drop-changed").data('content'),
+                    {"viewType": 1}); // 0 - side by side, 1 - inline
       console.log(result.length);
     }
     reader.readAsText(file);
@@ -70,19 +72,21 @@ function displayDiffInDiv(diff, outputDivId) {
   $(outputDivId).html(diff);
 }
 
-function displayDiff(baseText, newText) {
-  var diff = diffUsingJS({
+function displayDiff(baseText, newText, opts) {
+  var defaults = {
     "baseText": baseText,
     "newText": newText,
     "contextSizeInputId": "#contextSize"
-  });
+  };
+  var mergedOpts = $.extend({}, defaults, opts);
+  var diff = diffUsingJS(mergedOpts);
   displayDiffInDiv(diff, "#diffoutput");
 };
 
-function displayDiffById(baseId, newId) {
+function displayDiffById(baseId, newId, opts) {
   var baseText = $(baseId).val();
   var newText = $(newId).val();
-  displayDiff(baseText, newText)
+  displayDiff(baseText, newText, opts)
 }
 
 $(document).ready(function () {

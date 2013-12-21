@@ -43,9 +43,9 @@ onDrop = function(event) {
     reader.readAsText(file);
     $(this).find('.filename').text(file.name);
 
-}
+},
 
-function diffUsingJS(opts) {
+diffUsingJS = function(opts) {
   "use strict";
   var viewType         = opts["viewType"] || 0,
     baseText           = opts["baseText"],
@@ -69,13 +69,13 @@ function diffUsingJS(opts) {
     contextSize: 15,
     viewType: viewType
   });
-};
+},
 
-function displayDiffInDiv(diff, outputDivId) {
+displayDiffInDiv = function(diff, outputDivId) {
   $(outputDivId).html(diff);
-}
+},
 
-function displayDiff(baseText, newText, opts) {
+displayDiff = function(baseText, newText, opts) {
   var defaults = {
     "baseText": baseText,
     "newText": newText,
@@ -84,13 +84,13 @@ function displayDiff(baseText, newText, opts) {
   var diffOutputDiv = opts["diffOutputDiv"] || "#diffoutput"
   var diff = diffUsingJS(mergedOpts);
   displayDiffInDiv(diff, diffOutputDiv);
-};
+},
 
-function displayDiffById(baseId, newId, opts) {
+displayDiffById = function(baseId, newId, opts) {
   var baseText = $(baseId).val();
   var newText = $(newId).val();
   displayDiff(baseText, newText, opts)
-}
+};
 
 $(document).ready(function () {
   var dropBase = $('#drop-base'),

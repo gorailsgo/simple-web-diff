@@ -38,6 +38,7 @@ onDrop = function(event) {
                     $("#drop-changed").data('content'),
                     {"viewType": 1}); // 0 - side by side, 1 - inline
         colorLineNumbers();
+        $('#diff-results').show();
       }
     }
     reader.readAsText(file);

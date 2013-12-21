@@ -1,0 +1,61 @@
+table.diff {
+	width: 100%;
+	border-spacing: 0;
+	white-space:pre-wrap
+}
+table.diff tbody {
+	font-family:Courier, monospace
+}
+table.diff tbody th {
+	font-family: Consolas, "Liberation Mono", Courier, monospace;
+	background: white;
+	font-size: 12px;
+	font-weight:normal;
+	color: #000000;
+	padding-left: 2px;
+	padding-right: 2px;
+	text-align: center;
+}
+table.diff thead {
+	display: none;
+	background: white;
+	font-family:Verdana
+}
+table.diff thead th.texttitle {
+	text-align:left
+}
+table.diff tbody td {
+	line-height: 18px;
+	height: 18px;
+	font-size: 12px;
+	padding: 0;
+	padding-left: 5px;
+	color: rgb(51, 51, 51);
+}
+table.diff tbody tr th:nth-child(1),
+table.diff tbody tr th:nth-child(2) {
+	color: rgba(0,0,0,0.3);
+}
+table.diff tbody tr th:nth-child(2) {
+	border-right: 1px solid #eee;
+}
+table.diff .empty {
+	background-color:#DDD;
+}
+table.diff td.replace, table.diff td.replace ~ th {
+	background-color:#FD8
+}
+table.diff .delete, table.diff td.delete ~ th {
+	background-color: #ffdddd;
+}
+table.diff .skip {
+	background-color:#EFEFEF;
+	border:1px solid #AAA;
+	border-right:1px solid #BBC;
+}
+table.diff .insert, table.diff td.insert ~ th {
+	background-color: #ddffdd;
+}
+table.diff th.author {
+	display: none;
+}
